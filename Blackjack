@@ -1,0 +1,75 @@
+import random
+from replit import clear
+from art import logo
+
+def blackjack():
+  
+  cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+  
+  print(logo)
+  
+  user_cards = []
+  dealer_cards = []
+  
+  def draw_card(x):
+    x.append(cards[random.randint(0,12)])
+  
+  draw_card(user_cards)
+  draw_card(user_cards)
+  user_cards_total = sum(user_cards)
+  
+  draw_card(dealer_cards)
+  dealer_cards_total = sum(dealer_cards)
+  
+  while dealer_cards_total <= 16:
+    draw_card(dealer_cards)
+    dealer_cards_total = sum(dealer_cards)
+  
+  def end_game_messages():
+    print(f"Your final hand: {user_cards}, final score: {user_cards_total}")
+    print(f"Computer's final hand: {dealer_cards}, final score: {dealer_cards_total}")
+    
+  keep_playing = True
+  
+  while keep_playing == True:
+  
+    if user_cards_total <= 21:
+      print(f"Your cards: {user_cards}, current score: {user_cards_total}")
+      print(f"Computer's first card: {dealer_cards[0]}")
+      choice = input("Type 'y' to get another card, type 'n' to pass: ")
+      
+    if choice == 'y':
+      draw_card(user_cards)
+      user_cards_total = sum(user_cards)
+  
+    # if user_cards_total > 21 and 11 in user_cards:
+    if user_cards_total > 21 and 11 in user_cards:
+      user_cards[user_cards.index(11)] = 1
+      user_cards_total = sum(user_cards)
+    
+    if user_cards_total > 21:
+      print(f"Your cards: {user_cards}, current score: {user_cards_total}")
+      print(f"Computer's first card: {dealer_cards[0]}")
+      end_game_messages()
+      print("You lose")
+      keep_playing = False
+  
+    if choice == 'n':
+      keep_playing = False
+      end_game_messages()
+      if dealer_cards_total > 21:
+        print("You win")
+      elif dealer_cards_total <= 21 and dealer_cards_total > user_cards_total: 
+        print("You lose")
+      elif dealer_cards_total == user_cards_total:
+        print("Draw")
+      elif dealer_cards_total < user_cards_total:
+        print("You win")
+  
+  play_again = input("Do you want to play a game of Blackjack? Type 'y' or 'n':\n")
+  if play_again == 'y':
+    keep_playing = True
+    clear()
+    blackjack()
+
+blackjack()
