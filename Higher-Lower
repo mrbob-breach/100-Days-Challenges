@@ -1,0 +1,38 @@
+import art
+from game_data import data
+import random
+from replit import clear
+
+
+continue_game = True
+score = 0 
+
+while continue_game is True:
+  user_guess = ''
+  winner = ''
+  
+  randomnumber_A, randomnumber_B = random.sample(range(1, 50), 2)
+  selection_A = data[randomnumber_A]
+  selection_B = data[randomnumber_B]
+  
+  print(art.logo)
+  # print(f"psst {selection_A['follower_count']},{selection_B['follower_count']}")
+  print(f"Compare A: {selection_A['name']}, a {selection_A['description']}, from {selection_A['country']}.")
+  print(art.vs)
+  print(f"Against B: {selection_B['name']}, a {selection_B['description']}, from {selection_B['country']}.")
+  
+  user_guess = str(input("Who has more followers? Type 'A' or 'B': ")).lower()
+  
+  if selection_A['follower_count'] > selection_B['follower_count']:
+    winner = 'a'
+  elif selection_B['follower_count'] > selection_A['follower_count']:
+    winner = 'b'
+    
+  if user_guess == winner:
+    score += 1
+    clear()
+    print(f"You're right! Current score: {score}.")
+  elif user_guess != winner:
+    print(f"Sorry, that's wrong. Final score: {score}")
+    continue_game = False
+
