@@ -1,0 +1,88 @@
+question_bank = []
+
+for x in question_data:
+    question_bank.append(Question(x['question'], x['correct_answer']))
+
+quiz = QuizBrain(question_bank)
+
+while quiz.still_has_questions():
+    quiz.next_question()
+
+print("You've completed the quiz")
+print(f"Your final score was: {quiz.score}/{quiz.question_number}")
+
+
+
+
+class Question:
+
+    def __init__(self, text, answer):
+        self.text = text
+        self.answer = answer
+
+
+
+
+class QuizBrain:
+
+    def __init__(self, questions_list):
+        self.question_number = 0
+        self.questions_list = questions_list
+        self.score = 0
+    def next_question(self):
+        question = self.questions_list[self.question_number]
+        self.question_number += 1
+        user_answer = input(f"Q.{self.question_number}:{question.text} (True/False)")
+        self.check_answer(user_answer, question.answer)
+    def still_has_questions(self):
+        return self.question_number < len(self.questions_list)
+
+    def check_answer(self, user_answer, correct_answer):
+        if user_answer.lower() == correct_answer.lower():
+            print("You got it right!")
+            self.score += 1
+        else:
+            print("That's wrong.")
+        print(f"The correct answer was {correct_answer}")
+        print(f"Your current score is: {self.score}/{self.question_number}")
+        print("\n")
+
+
+
+
+question_data = [
+    {"type": "boolean", "difficulty": "easy", "category": "History",
+     "question": "Former United States Presidents John Adams and Thomas Jefferson died within hours of each other.",
+     "correct_answer": "True", "incorrect_answers": ["False"]},
+    {"type": "boolean", "difficulty": "medium",
+     "category": "Entertainment: Japanese Anime &amp; Manga",
+     "question": "In Full Metal Panic!, Whispered are those who are capable of creating Black Technology.",
+     "correct_answer": "True", "incorrect_answers": ["False"]},
+    {"type": "boolean", "difficulty": "medium", "category": "Mythology",
+     "question": "In Greek mythology, Hera is the goddess of harvest.",
+     "correct_answer": "False", "incorrect_answers": ["True"]},
+    {"type": "boolean", "difficulty": "medium",
+     "category": "Science &amp; Nature",
+     "question": "The &quot;Gympie Stinger&quot; is the deadliest plant in the world.",
+     "correct_answer": "False", "incorrect_answers": ["True"]},
+    {"type": "boolean", "difficulty": "medium",
+     "category": "Science: Mathematics", "question": "E = MC3",
+     "correct_answer": "False", "incorrect_answers": ["True"]},
+    {"type": "boolean", "difficulty": "medium",
+     "category": "General Knowledge",
+     "question": "Fast food restaurant chains Carl&#039;s Jr. and Hardee&#039;s are owned by the same company.",
+     "correct_answer": "True", "incorrect_answers": ["False"]},
+    {"type": "boolean", "difficulty": "easy", "category": "History",
+     "question": "In World War ll, Great Britian used inflatable tanks on the ports of Great Britain to divert Hitler away from Normandy/D-day landing.",
+     "correct_answer": "True", "incorrect_answers": ["False"]},
+    {"type": "boolean", "difficulty": "hard",
+     "category": "Entertainment: Japanese Anime &amp; Manga",
+     "question": "In the &quot;To Love-Ru&quot; series, Peke is considered a female robot.",
+     "correct_answer": "True", "incorrect_answers": ["False"]},
+    {"type": "boolean", "difficulty": "medium", "category": "Geography",
+     "question": "Israel is 7 hours ahead of New York.",
+     "correct_answer": "True", "incorrect_answers": ["False"]},
+    {"type": "boolean", "difficulty": "easy",
+     "category": "Entertainment: Film",
+     "question": "The movie &quot;The Nightmare before Christmas&quot; was all done with physical objects.",
+     "correct_answer": "True", "incorrect_answers": ["False"]}]
