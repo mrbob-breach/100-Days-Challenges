@@ -2,12 +2,12 @@ import turtle
 from turtle import Turtle, Screen
 import random
 
-nori = Turtle("turtle")
-gondor = Turtle("turtle")
-twilight = Turtle("turtle")
-mishu = Turtle("turtle")
-misty = Turtle("turtle")
-arwen = Turtle("turtle")
+cat_a = Turtle("turtle")
+cat_b = Turtle("turtle")
+cat_c = Turtle("turtle")
+cat_d = Turtle("turtle")
+cat_e = Turtle("turtle")
+cat_f = Turtle("turtle")
 
 is_race_on = False
 screen = Screen()
@@ -15,7 +15,7 @@ screen.setup(500, 400)
 user_bet = screen.textinput("Make your bet", "Which cat will win the race? Enter a name: ").lower()
 
 colors = ["black", "gray0", "grey", "brown", "mistyrose4", "orange"]
-cats = [nori, gondor, twilight, mishu, misty, arwen]
+cats = [cat_a, cat_b, cat_c, cat_d, cat_e, cat_f]
 first_cat_start = -125
 first_cat_color = 0
 
